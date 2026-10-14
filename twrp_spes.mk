@@ -58,5 +58,6 @@ COMMON_PATH := device/$(PRODUCT_BRAND)/$(COMMON_SOC)-common
 DEVICE_PATH := device/$(PRODUCT_BRAND)/$(PRODUCT_DEVICE)
 
 # Inherit from hardware-specific part of the product configuration
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(DEVICE_PATH)/device.mk)
 #
