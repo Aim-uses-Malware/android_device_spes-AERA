@@ -21,7 +21,7 @@
 # Structure follows aera_garnet.mk. SPES values come from the spes OrangeFox
 # 12.1 tree (Jashkirat); settings garnet has and SPES does not need are omitted.
 
-AERA_MAINTAINER := Aim-uses-Malware
+AERA_MAINTAINER := yupdrugs
 
 # Screen settings. SPES is 1080x2400 with a punch-hole camera.
 AERA_UI2_ADAPTIVE_RESOLUTION := true
