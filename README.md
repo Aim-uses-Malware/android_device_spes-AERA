@@ -17,3 +17,24 @@ Storage | 64/128 GB (UFS 2.2)
 Battery | Non-removable Li-Po 5000 mAh
 Display | 1080 x 2400 pixels, 6.43 inches (~409 ppi pixel density)
 Camera | Main 50 MP f/1.8, ultrawide lens, macro lens, depth lens, LED flash
+
+## Building
+
+Sync the AERA sources, then run:
+
+```
+source build/envsetup.sh
+lunch twrp_spes-bp2a-eng
+mka recoveryimage
+```
+
+Unlike garnet there is no shared `sm84xx-common` dependency: everything the
+common tree provides for garnet is part of this tree.
+
+Before the first build, read the `TODO(...)` markers in `BoardConfig.mk`,
+`device.mk` and `aera_spes.mk` (kernel choice, vendor module list, partition
+sizes and brightness values need to be confirmed on the device).
+
+## Credits
+- Board values from [Jashkirat/device_xiaomi_spes_orangefox](https://github.com/Jashkirat/device_xiaomi_spes_orangefox) (fox-12.1)
+- Structure follows the AERA garnet tree ([original garnet tree by nebrassy](https://github.com/nebrassy/device_xiaomi_garnet-TWRP.git))

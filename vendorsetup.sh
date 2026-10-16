@@ -36,6 +36,8 @@ fi
 
 if [ "$1" = "$FDEVICE" ] || [ "$AERA_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export LC_ALL="C"
+	# garnet gets this from sm84xx-common/vendorsetup.sh; SPES has no common tree.
+	export ALLOW_MISSING_DEPENDENCIES=true
 	export AERA_AB_DEVICE=1
 	export AERA_VIRTUAL_AB_DEVICE=1
 	export AERA_VANILLA_BUILD=1

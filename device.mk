@@ -10,6 +10,11 @@
 # include (not inherit-product) the common settings - works better with device-specific files
 -include $(COMMON_PATH)/device-common.mk
 
+# Settings garnet gets from sm84xx-common/device-common.mk. SPES has no common
+# tree, so the ones that apply to bengal are set here directly.
+QCOM_BOARD_PLATFORMS += $(PRODUCT_PLATFORM)
+RELAX_USES_LIBRARY_CHECK := true
+
 AERA_DEFAULT_LANGUAGE     := en
 AERA_USE_TOOLBOX          := true
 AERA_INCLUDE_NTFS_3G      := true
@@ -76,9 +81,10 @@ PRODUCT_SYSTEM_PROPERTIES += \
     persist.sys.fuse.passthrough.enable=true
 
 # Init scripts
-PRODUCT_PACKAGES += \
-    init.recovery.qcom.sh \
-    init.recovery.qcom.rc
+# init.recovery.qcom.rc is installed by the recovery/root copy below. There are
+# no "init.recovery.qcom.sh" / "init.recovery.qcom.rc" modules in the AERA
+# sources (garnet does not list them either), so naming them in PRODUCT_PACKAGES
+# only produced missing-module errors.
 
 # Update engine
 PRODUCT_PACKAGES += \
@@ -99,13 +105,8 @@ AERA_INCLUDE_CRYPTO_FBE := true
 AERA_INCLUDE_FBE_METADATA_DECRYPT := true
 BOARD_USES_QCOM_FBE_DECRYPTION := true
 
-# Version/patch-level override so keystore does not reject the vendor blobs.
-# Carried from the 12.1 tree; garnet's files do not show an equivalent, so
-# drop these three lines if decryption works without them.
-PLATFORM_SECURITY_PATCH := 2099-12-31
-VENDOR_SECURITY_PATCH := 2099-12-31
-PLATFORM_VERSION := 99.87.36
-PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
+# The PLATFORM_VERSION / security-patch overrides live in BoardConfig.mk (same
+# place as garnet's BoardConfigCommon.mk).
 
 ALLOW_MISSING_DEPENDENCIES := true
 

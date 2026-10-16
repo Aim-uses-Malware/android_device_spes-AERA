@@ -1,0 +1,9 @@
+# Crypto
+# Mirrors garnet's vendor.prop. SPES uses the same FBE + metadata-encryption
+# setup (see recovery.fstab), so the dm-default-key options must be described
+# to the recovery the same way. SPES shipped on Android 11 (first API level
+# 30), which is the options format version 2 case.
+ro.crypto.allow_encrypt_override=true
+ro.crypto.dm_default_key.options_format.version=2
+ro.crypto.volume.metadata.method=dm-default-key
+#

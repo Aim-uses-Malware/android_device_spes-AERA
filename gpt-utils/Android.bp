@@ -24,9 +24,10 @@ cc_library {
         "liblog",
         "libz",
     ],
+    // No -Werror: this is old CAF code and newer clang releases add warnings
+    // that would otherwise break the build for no functional reason.
     cflags: [
         "-Wall",
-        "-Werror",
     ],
     srcs: [
         "gpt-utils.cpp",

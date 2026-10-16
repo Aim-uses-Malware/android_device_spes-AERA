@@ -52,6 +52,15 @@ TARGET_NO_BOOTLOADER := true
 BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
 
+# Same relaxations garnet gets from sm84xx-common/BoardConfigCommon.mk. This
+# tree copies prebuilt ELF blobs (recovery/root/**) with PRODUCT_COPY_FILES and
+# pulls in legacy CAF makefiles, which newer branches reject by default.
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+BUILD_BROKEN_USES_BUILD_HOST_SHARED_LIBRARY := true
+BUILD_BROKEN_USES_BUILD_HOST_STATIC_LIBRARY := true
+BUILD_BROKEN_USES_BUILD_HOST_EXECUTABLE := true
+BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
+
 # Kernel boot image
 BOARD_BOOT_HEADER_VERSION := 3
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
@@ -133,6 +142,14 @@ TARGET_BOARD_PLATFORM := bengal
 
 # Properties
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
+TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
+
+# Encryption / version override so keystore does not reject the vendor blobs
+# (same values and same place as garnet's BoardConfigCommon.mk).
+PLATFORM_VERSION := 99.87.36
+PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
+PLATFORM_SECURITY_PATCH := 2099-12-31
+VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 
 # Recovery
 BOARD_USES_RECOVERY_AS_BOOT := true

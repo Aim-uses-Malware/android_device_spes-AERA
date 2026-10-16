@@ -1,0 +1,18 @@
+<!--
+    VINTF manifest fragment declaring the boot control HAL for recovery.
+
+    The recovery's boot-hal-1-2 service registers the 1.0, 1.1 and 1.2
+    IBootControl interfaces. A manifest that only declares @1.1 makes
+    hwservicemanager refuse the @1.2 registration ("... must be in VINTF
+    manifest"), the service exits and init respawns it in a loop. Declaring
+    @1.2 also satisfies @1.0/@1.1 clients (HIDL minor-version compatibility),
+    which is what the recovery's BootControlClient requests for A/B slot
+    operations.
+-->
+<manifest version="1.0" type="device">
+    <hal format="hidl">
+        <name>android.hardware.boot</name>
+        <transport>hwbinder</transport>
+        <fqname>@1.2::IBootControl/default</fqname>
+    </hal>
+</manifest>
